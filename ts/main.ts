@@ -18,3 +18,37 @@ $urlLink.addEventListener('input', handleInput);
 // All the event.target is is the element that fired the event
 // So since I am listening for the input event on my input for the photoURL
 // my event.target is referring to that input element that was typed in.
+
+interface FormElement extends HTMLFormControlsCollection {
+  placeholder: HTMLImageElement;
+  title: HTMLInputElement;
+  photourl: HTMLInputElement;
+}
+
+// interface DataModel {
+// view: string;
+// entries: [];
+// editing: null;
+// nextEntryId: number;
+// entryId: number;
+// }
+
+const $form = document.querySelector('.entry-form') as HTMLFormElement;
+if (!$form) throw new Error('$form failed to query');
+
+const $data = document.querySelector('data');
+if (!$data) throw new Error('$data failed to query');
+
+function submitForm(event: Event): void {
+  if (!$form) throw new Error('$form failed to query');
+  const $formValues = $form.elements as FormElement;
+  const myObjectForm = {
+    title: $formValues.title.value,
+    photourl: $formValues.photourl.value,
+    entryId: data.nextEntryId,
+  };
+  console.log('myObjectForm', myObjectForm);
+  event.preventDefault();
+}
+
+$form.addEventListener('submit', submitForm);
