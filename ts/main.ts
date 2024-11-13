@@ -12,6 +12,7 @@ function handleInput(event: Event): void {
   const eventTargetValue = $eventTarget.value;
   console.log('eventTargetValue', eventTargetValue);
   $replaceImage.setAttribute('src', 'eventTarget');
+  writeData();
 }
 $urlLink.addEventListener('input', handleInput);
 
@@ -45,6 +46,7 @@ function submitForm(event: Event): void {
     photourl: $formValues.photourl.value,
     entryId: data.nextEntryId,
   };
+  writeData();
 
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
