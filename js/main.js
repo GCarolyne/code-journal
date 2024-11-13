@@ -1,5 +1,5 @@
 'use strict';
-const $replaceImage = document.querySelector('img');
+const $replaceImage = document.querySelector('#placeholder');
 if (!$replaceImage) throw new Error('$replaceImage failed to query');
 console.log('$replaceImage', $replaceImage);
 const $urlLink = document.querySelector('#photourl');
@@ -10,16 +10,14 @@ function handleInput(event) {
   const $eventTarget = event.target;
   const eventTargetValue = $eventTarget.value;
   console.log('eventTargetValue', eventTargetValue);
-  $replaceImage.setAttribute('src', 'eventTarget');
-  writeData();
+  $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
-const $form = document.querySelector('.entry-form');
+const $form = document.querySelector('.form');
 if (!$form) throw new Error('$form failed to query');
-const $data = document.querySelector('data');
+const $data = document.querySelector('.hidden');
 if (!$data) throw new Error('$data failed to query');
 function submitForm(event) {
-  if (!$form) throw new Error('$form failed to query');
   const $formValues = $form.elements;
   const myObjectForm = {
     title: $formValues.title.value,
@@ -28,7 +26,9 @@ function submitForm(event) {
   };
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
-  $form.reset();
   event.preventDefault();
+  writeData();
+  $form.reset();
 }
 $form.addEventListener('submit', submitForm);
+console.log('submitForm', submitForm);

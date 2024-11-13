@@ -1,4 +1,4 @@
-const $replaceImage = document.querySelector('img');
+const $replaceImage = document.querySelector('#placeholder');
 if (!$replaceImage) throw new Error('$replaceImage failed to query');
 console.log('$replaceImage', $replaceImage);
 
@@ -11,14 +11,10 @@ function handleInput(event: Event): void {
   const $eventTarget = event.target as HTMLInputElement;
   const eventTargetValue = $eventTarget.value;
   console.log('eventTargetValue', eventTargetValue);
-  $replaceImage.setAttribute('src', 'eventTarget');
-  writeData();
+
+  $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
-
-// All the event.target is is the element that fired the event
-// So since I am listening for the input event on my input for the photoURL
-// my event.target is referring to that input element that was typed in.
 
 interface FormElement extends HTMLFormControlsCollection {
   placeholder: HTMLImageElement;
@@ -32,14 +28,13 @@ interface myObjectForms {
   entryId: number;
 }
 
-const $form = document.querySelector('.entry-form') as HTMLFormElement;
+const $form = document.querySelector('.form') as HTMLFormElement;
 if (!$form) throw new Error('$form failed to query');
 
-const $data = document.querySelector('data');
+const $data = document.querySelector('.hidden');
 if (!$data) throw new Error('$data failed to query');
 
 function submitForm(event: Event): void {
-  if (!$form) throw new Error('$form failed to query');
   const $formValues = $form.elements as FormElement;
   const myObjectForm: myObjectForms = {
     title: $formValues.title.value,
@@ -49,9 +44,11 @@ function submitForm(event: Event): void {
 
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
-  $form.reset();
-
   event.preventDefault();
+  writeData();
+  $form.reset();
 }
 
 $form.addEventListener('submit', submitForm);
+
+console.log('submitForm', submitForm);

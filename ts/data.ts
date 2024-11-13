@@ -1,26 +1,29 @@
 interface DataModel {
   view: string;
-  entries: any;
+  entries: myObjectForms[];
   editing: null;
   nextEntryId: number;
   entryId: number;
 }
 
-const data: DataModel = {
+let data: DataModel = {
   view: 'entry-form',
   entries: [],
   editing: null,
   nextEntryId: 1,
   entryId: 1,
 };
-readData();
+
+data = readData();
 
 function writeData(): void {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('data-storage', dataJSON);
 }
 
-function readData(): void {
+writeData();
+
+function readData(): any {
   const dataJSON = localStorage.getItem('data-storage');
   if (dataJSON) {
     return JSON.parse(dataJSON);
