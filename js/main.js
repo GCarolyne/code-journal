@@ -13,7 +13,7 @@ function handleInput(event) {
   $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
-const $form = document.querySelector('.form');
+const $form = document.querySelector('form');
 if (!$form) throw new Error('$form failed to query');
 const $data = document.querySelector('.hidden');
 if (!$data) throw new Error('$data failed to query');
@@ -28,7 +28,6 @@ function submitForm(event) {
   if (!$data) throw new Error('$data failed to query');
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
-  $data.appendChild($form);
   $form.reset();
   writeData();
 }

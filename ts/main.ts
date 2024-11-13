@@ -28,7 +28,7 @@ interface myObjectForms {
   entryId: number;
 }
 
-const $form = document.querySelector('.form') as HTMLFormElement;
+const $form = document.querySelector('form') as HTMLFormElement;
 if (!$form) throw new Error('$form failed to query');
 
 const $data = document.querySelector('.hidden');
@@ -45,7 +45,6 @@ function submitForm(event: Event): void {
   if (!$data) throw new Error('$data failed to query');
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
-  $data.appendChild($form);
   $form.reset();
   writeData();
 }
