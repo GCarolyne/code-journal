@@ -1,19 +1,10 @@
-interface DataModel {
-  view: string;
-  entries: myObjectForms[];
-  editing: null;
-  nextEntryId: number;
-  entryId: number;
-}
-
+'use strict';
 const data = readData();
-
-function writeData(): void {
+function writeData() {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('data', dataJSON);
 }
-
-function readData(): DataModel {
+function readData() {
   const storedDataJSON = localStorage.getItem('data');
   if (storedDataJSON) {
     return JSON.parse(storedDataJSON);

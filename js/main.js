@@ -1,45 +1,28 @@
+'use strict';
 const $replaceImage = document.querySelector('#placeholder');
 if (!$replaceImage) throw new Error('$replaceImage failed to query');
-
 const $urlLink = document.querySelector('#photourl');
 if (!$urlLink) throw new Error('$urlLink failed to query');
-
-function handleInput(event: Event): void {
+function handleInput(event) {
   if (!$replaceImage) throw new Error('$replaceImage failed to query');
-  const $eventTarget = event.target as HTMLInputElement;
+  const $eventTarget = event.target;
   const eventTargetValue = $eventTarget.value;
   $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
-
-interface FormElement extends HTMLFormControlsCollection {
-  placeholder: HTMLImageElement;
-  title: HTMLInputElement;
-  photourl: HTMLInputElement;
-}
-
-interface myObjectForms {
-  title: string;
-  photourl: string;
-  entryId: number;
-}
-
-const $form = document.querySelector('form') as HTMLFormElement;
+const $form = document.querySelector('form');
 if (!$form) throw new Error('$form failed to query');
-
-function submitForm(event: Event): void {
+function submitForm(event) {
   event.preventDefault();
-  const $formValues = $form.elements as FormElement;
-  const myObjectForm: myObjectForms = {
+  const $formValues = $form.elements;
+  const myObjectForm = {
     title: $formValues.title.value,
     photourl: $formValues.photourl.value,
     entryId: data.nextEntryId,
   };
-
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
   $form.reset();
   writeData();
 }
-
 $form.addEventListener('submit', submitForm);
