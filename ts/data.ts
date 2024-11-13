@@ -12,7 +12,6 @@ function writeData(): void {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('data', dataJSON);
 }
-writeData();
 
 function readData(): DataModel {
   const storedDataJSON = localStorage.getItem('data');

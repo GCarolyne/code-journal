@@ -19,16 +19,13 @@ interface FormElement extends HTMLFormControlsCollection {
 }
 
 interface myObjectForms {
-  title: any;
-  photourl: any;
+  title: string;
+  photourl: string;
   entryId: number;
 }
 
 const $form = document.querySelector('form') as HTMLFormElement;
 if (!$form) throw new Error('$form failed to query');
-
-const $data = document.querySelector('.hidden');
-if (!$data) throw new Error('$data failed to query');
 
 function submitForm(event: Event): void {
   event.preventDefault();
@@ -38,7 +35,7 @@ function submitForm(event: Event): void {
     photourl: $formValues.photourl.value,
     entryId: data.nextEntryId,
   };
-  if (!$data) throw new Error('$data failed to query');
+
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
   $form.reset();
