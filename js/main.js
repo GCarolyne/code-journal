@@ -18,17 +18,19 @@ if (!$form) throw new Error('$form failed to query');
 const $data = document.querySelector('.hidden');
 if (!$data) throw new Error('$data failed to query');
 function submitForm(event) {
+  event.preventDefault();
   const $formValues = $form.elements;
   const myObjectForm = {
     title: $formValues.title.value,
     photourl: $formValues.photourl.value,
     entryId: data.nextEntryId,
   };
+  if (!$data) throw new Error('$data failed to query');
   data.nextEntryId++;
   data.entries.unshift(myObjectForm);
-  event.preventDefault();
-  writeData();
+  $data.appendChild($form);
   $form.reset();
+  writeData();
 }
 $form.addEventListener('submit', submitForm);
 console.log('submitForm', submitForm);

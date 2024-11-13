@@ -6,15 +6,15 @@ let data = {
   nextEntryId: 1,
   entryId: 1,
 };
-data = readData();
+data += readData();
 function writeData() {
   const dataJSON = JSON.stringify(data);
-  localStorage.setItem('data-storage', dataJSON);
+  localStorage.setItem('data', dataJSON);
 }
 writeData();
 function readData() {
-  const dataJSON = localStorage.getItem('data-storage');
-  if (dataJSON) {
-    return JSON.parse(dataJSON);
+  const storedDataJSON = localStorage.getItem('data');
+  if (storedDataJSON) {
+    return JSON.parse(storedDataJSON);
   }
 }
