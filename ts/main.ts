@@ -1,17 +1,13 @@
 const $replaceImage = document.querySelector('#placeholder');
 if (!$replaceImage) throw new Error('$replaceImage failed to query');
-console.log('$replaceImage', $replaceImage);
 
 const $urlLink = document.querySelector('#photourl');
 if (!$urlLink) throw new Error('$urlLink failed to query');
-console.log('$urlLink', $urlLink);
 
 function handleInput(event: Event): void {
   if (!$replaceImage) throw new Error('$replaceImage failed to query');
   const $eventTarget = event.target as HTMLInputElement;
   const eventTargetValue = $eventTarget.value;
-  console.log('eventTargetValue', eventTargetValue);
-
   $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
@@ -50,5 +46,3 @@ function submitForm(event: Event): void {
 }
 
 $form.addEventListener('submit', submitForm);
-
-console.log('submitForm', submitForm);

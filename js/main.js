@@ -1,15 +1,12 @@
 'use strict';
 const $replaceImage = document.querySelector('#placeholder');
 if (!$replaceImage) throw new Error('$replaceImage failed to query');
-console.log('$replaceImage', $replaceImage);
 const $urlLink = document.querySelector('#photourl');
 if (!$urlLink) throw new Error('$urlLink failed to query');
-console.log('$urlLink', $urlLink);
 function handleInput(event) {
   if (!$replaceImage) throw new Error('$replaceImage failed to query');
   const $eventTarget = event.target;
   const eventTargetValue = $eventTarget.value;
-  console.log('eventTargetValue', eventTargetValue);
   $replaceImage.setAttribute('src', eventTargetValue);
 }
 $urlLink.addEventListener('input', handleInput);
@@ -32,4 +29,3 @@ function submitForm(event) {
   writeData();
 }
 $form.addEventListener('submit', submitForm);
-console.log('submitForm', submitForm);
