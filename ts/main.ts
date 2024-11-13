@@ -25,13 +25,11 @@ interface FormElement extends HTMLFormControlsCollection {
   photourl: HTMLInputElement;
 }
 
-// interface DataModel {
-// view: string;
-// entries: [];
-// editing: null;
-// nextEntryId: number;
-// entryId: number;
-// }
+interface myObjectForms {
+  title: any;
+  photourl: any;
+  entryId: number;
+}
 
 const $form = document.querySelector('.entry-form') as HTMLFormElement;
 if (!$form) throw new Error('$form failed to query');
@@ -42,12 +40,16 @@ if (!$data) throw new Error('$data failed to query');
 function submitForm(event: Event): void {
   if (!$form) throw new Error('$form failed to query');
   const $formValues = $form.elements as FormElement;
-  const myObjectForm = {
+  const myObjectForm: myObjectForms = {
     title: $formValues.title.value,
     photourl: $formValues.photourl.value,
     entryId: data.nextEntryId,
   };
-  console.log('myObjectForm', myObjectForm);
+
+  data.nextEntryId++;
+  data.entries.unshift(myObjectForm);
+  $form.reset();
+
   event.preventDefault();
 }
 
