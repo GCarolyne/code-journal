@@ -28,19 +28,30 @@ function submitForm(event) {
 }
 $form.addEventListener('submit', submitForm);
 function renderEntry(entry) {
-  const $entryAll = document.createElement('ul');
-  $entryAll.className = 'journal-entries-list';
+  const $myChild = document.createElement('li');
+  $myChild.className = 'row';
+  const $myChild2 = document.createElement('div');
+  $myChild2.className = 'column-half';
   const $entryImage = document.createElement('img');
   $entryImage.setAttribute('src', entry.photourl);
   const $entryTitle = document.createElement('h1');
   $entryTitle.textContent = entry.title;
   const $entryNotes = document.createElement('p');
   $entryNotes.textContent = entry.notes;
+  $myChild.appendChild($myChild2);
+  $myChild2.appendChild($entryImage);
+  $myChild2.appendChild($entryTitle);
+  $entryTitle.appendChild($entryNotes);
 }
 console.log('renderEntry', renderEntry);
+const $Parent = document.querySelector('.journal-entries-list');
+if (!$Parent) throw new Error('the $Parent query failed');
 function generateDom() {
+  if (!$Parent) throw new Error('the $Parent query failed');
   for (let i = 0; i < data.entries.length; i++) {
-    data.entries.push();
+    const $allEntry = renderEntry(data.entries[i]);
+    $Parent.appendChild($allEntry);
+    console.log('$allEntry', $allEntry);
   }
 }
 document.addEventListener('DOMContentLoaded', generateDom);

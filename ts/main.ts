@@ -47,9 +47,12 @@ function submitForm(event: Event): void {
 
 $form.addEventListener('submit', submitForm);
 
-function renderEntry(entry: myObjectForms): undefined {
-  const $entryAll = document.createElement('ul');
-  $entryAll.className = 'journal-entries-list';
+function renderEntry(entry: myObjectForms): HTMLElement {
+  const $myChild = document.createElement('li');
+  $myChild.className = 'row';
+
+  const $myChild2 = document.createElement('div');
+  $myChild2.className = 'column-half';
 
   const $entryImage = document.createElement('img');
   $entryImage.setAttribute('src', entry.photourl);
@@ -59,12 +62,23 @@ function renderEntry(entry: myObjectForms): undefined {
 
   const $entryNotes = document.createElement('p');
   $entryNotes.textContent = entry.notes;
+
+  $myChild.appendChild($myChild2);
+  $myChild2.appendChild($entryImage);
+  $myChild2.appendChild($entryTitle);
+  $entryTitle.appendChild($entryNotes);
 }
 console.log('renderEntry', renderEntry);
 
-function generateDom(): void {
+const $Parent = document.querySelector('.journal-entries-list');
+if (!$Parent) throw new Error('the $Parent query failed');
+
+function generateDom(): any {
+  if (!$Parent) throw new Error('the $Parent query failed');
   for (let i = 0; i < data.entries.length; i++) {
-    data.entries.push();
+    const $allEntry = renderEntry(data.entries[i]);
+    $Parent.appendChild($allEntry);
+    console.log('$allEntry', $allEntry);
   }
 }
 
