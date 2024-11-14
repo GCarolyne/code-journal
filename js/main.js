@@ -18,6 +18,7 @@ function submitForm(event) {
   const myObjectForm = {
     title: $formValues.title.value,
     photourl: $formValues.photourl.value,
+    notes: $formValues.notes.value,
     entryId: data.nextEntryId,
   };
   data.nextEntryId++;
@@ -26,3 +27,12 @@ function submitForm(event) {
   writeData();
 }
 $form.addEventListener('submit', submitForm);
+function renderEntry(entry) {
+  const $entryImage = document.createElement('img');
+  $entryImage.setAttribute('src', entry.photourl);
+  const $entryTitle = document.createElement('h1');
+  $entryTitle.textContent = entry.title;
+  const $entryNotes = document.createElement('p');
+  $entryNotes.textContent = entry.notes;
+}
+console.log('renderEntry', renderEntry);

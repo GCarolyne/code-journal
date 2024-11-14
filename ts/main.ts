@@ -16,11 +16,13 @@ interface FormElement extends HTMLFormControlsCollection {
   placeholder: HTMLImageElement;
   title: HTMLInputElement;
   photourl: HTMLInputElement;
+  notes: HTMLInputElement;
 }
 
 interface myObjectForms {
   title: string;
   photourl: string;
+  notes: string;
   entryId: number;
 }
 
@@ -33,6 +35,7 @@ function submitForm(event: Event): void {
   const myObjectForm: myObjectForms = {
     title: $formValues.title.value,
     photourl: $formValues.photourl.value,
+    notes: $formValues.notes.value,
     entryId: data.nextEntryId,
   };
 
@@ -43,3 +46,15 @@ function submitForm(event: Event): void {
 }
 
 $form.addEventListener('submit', submitForm);
+
+function renderEntry(entry: myObjectForms): void {
+  const $entryImage = document.createElement('img');
+  $entryImage.setAttribute('src', entry.photourl);
+
+  const $entryTitle = document.createElement('h1');
+  $entryTitle.textContent = entry.title;
+
+  const $entryNotes = document.createElement('p');
+  $entryNotes.textContent = entry.notes;
+}
+console.log('renderEntry', renderEntry);
