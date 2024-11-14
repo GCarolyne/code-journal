@@ -28,6 +28,8 @@ function submitForm(event) {
 }
 $form.addEventListener('submit', submitForm);
 function renderEntry(entry) {
+  const $entryAll = document.createElement('ul');
+  $entryAll.className = 'journal-entries-list';
   const $entryImage = document.createElement('img');
   $entryImage.setAttribute('src', entry.photourl);
   const $entryTitle = document.createElement('h1');
@@ -36,3 +38,9 @@ function renderEntry(entry) {
   $entryNotes.textContent = entry.notes;
 }
 console.log('renderEntry', renderEntry);
+function generateDom() {
+  for (let i = 0; i < data.entries.length; i++) {
+    data.entries.push();
+  }
+}
+document.addEventListener('DOMContentLoaded', generateDom);
