@@ -36,3 +36,9 @@ button {
   width: 100%;
   margin-bottom: 20px;
 }
+
+.journal-entry {
+  display: flex;
+  flex-direction: column;
+  size-adjust: 50%;
+}
