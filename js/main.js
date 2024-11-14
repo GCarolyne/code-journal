@@ -55,3 +55,14 @@ function generateDom() {
   }
 }
 document.addEventListener('DOMContentLoaded', generateDom);
+const $entriesView = document.querySelector('#no-entries');
+if (!$entriesView) throw new Error('the $entriesView query failed');
+function toggleNoEntries() {
+  if (!$entriesView) throw new Error('the $entriesView query failed');
+  if (data.entries.length > 0) {
+    $entriesView.classList.remove('.hidden');
+  } else {
+    $entriesView.classList.add('.hidden');
+  }
+}
+console.log('toggleNoEntries', toggleNoEntries);
