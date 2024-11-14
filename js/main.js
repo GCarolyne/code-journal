@@ -42,16 +42,16 @@ function renderEntry(entry) {
   $myChild2.appendChild($entryImage);
   $myChild2.appendChild($entryTitle);
   $entryTitle.appendChild($entryNotes);
+  return $myChild;
 }
 console.log('renderEntry', renderEntry);
-const $Parent = document.querySelector('.journal-entries-list');
-if (!$Parent) throw new Error('the $Parent query failed');
+const $parent = document.querySelector('ul');
+if (!$parent) throw new Error('the $Parent query failed');
 function generateDom() {
-  if (!$Parent) throw new Error('the $Parent query failed');
+  if (!$parent) throw new Error('the $parent query failed');
   for (let i = 0; i < data.entries.length; i++) {
     const $allEntry = renderEntry(data.entries[i]);
-    $Parent.appendChild($allEntry);
-    console.log('$allEntry', $allEntry);
+    $parent.appendChild($allEntry);
   }
 }
 document.addEventListener('DOMContentLoaded', generateDom);
