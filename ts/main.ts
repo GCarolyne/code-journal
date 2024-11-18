@@ -1,17 +1,3 @@
-const $replaceImage = document.querySelector('#placeholder');
-if (!$replaceImage) throw new Error('$replaceImage failed to query');
-
-const $urlLink = document.querySelector('#photourl');
-if (!$urlLink) throw new Error('$urlLink failed to query');
-
-function handleInput(event: Event): void {
-  if (!$replaceImage) throw new Error('$replaceImage failed to query');
-  const $eventTarget = event.target as HTMLInputElement;
-  const eventTargetValue = $eventTarget.value;
-  $replaceImage.setAttribute('src', eventTargetValue);
-}
-$urlLink.addEventListener('input', handleInput);
-
 interface FormElement extends HTMLFormControlsCollection {
   placeholder: HTMLImageElement;
   title: HTMLInputElement;
@@ -25,6 +11,20 @@ interface myObjectForms {
   notes: string;
   entryId: number;
 }
+
+const $replaceImage = document.querySelector('#placeholder');
+if (!$replaceImage) throw new Error('$replaceImage failed to query');
+
+const $urlLink = document.querySelector('#photourl');
+if (!$urlLink) throw new Error('$urlLink failed to query');
+
+function handleInput(event: Event): void {
+  if (!$replaceImage) throw new Error('$replaceImage failed to query');
+  const $eventTarget = event.target as HTMLInputElement;
+  const eventTargetValue = $eventTarget.value;
+  $replaceImage.setAttribute('src', eventTargetValue);
+}
+$urlLink.addEventListener('input', handleInput);
 
 const $form = document.querySelector('form') as HTMLFormElement;
 if (!$form) throw new Error('$form failed to query');
@@ -85,7 +85,7 @@ function generateDom(): any {
 
 document.addEventListener('DOMContentLoaded', generateDom);
 
-const $entriesView = document.querySelector('#no-entries');
+const $entriesView = document.querySelector('#entries-stored');
 if (!$entriesView) throw new Error('the $entriesView query failed');
 
 function toggleNoEntries(): void {
@@ -97,3 +97,12 @@ function toggleNoEntries(): void {
   }
 }
 console.log('toggleNoEntries', toggleNoEntries);
+
+const $entryForm = document.querySelector('#myform');
+if (!$entryForm) throw new Error('the $entryForm query failed');
+
+const $entryStored = document.querySelector('#entries-stored');
+if (!$entryStored) throw new Error('the $entryStored query failed');
+
+const $journalEntries = document.querySelector('#journal-entries-list');
+if (!$journalEntries) throw new Error('the $journalEntries query failed');

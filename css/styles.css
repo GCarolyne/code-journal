@@ -55,3 +55,7 @@ ul {
 .form {
   margin-bottom: 50px;
 }
+
+a {
+  display: flex;
+}

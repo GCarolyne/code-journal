@@ -55,7 +55,7 @@ function generateDom() {
   }
 }
 document.addEventListener('DOMContentLoaded', generateDom);
-const $entriesView = document.querySelector('#no-entries');
+const $entriesView = document.querySelector('#entries-stored');
 if (!$entriesView) throw new Error('the $entriesView query failed');
 function toggleNoEntries() {
   if (!$entriesView) throw new Error('the $entriesView query failed');
@@ -66,3 +66,9 @@ function toggleNoEntries() {
   }
 }
 console.log('toggleNoEntries', toggleNoEntries);
+const $entryForm = document.querySelector('#myform');
+if (!$entryForm) throw new Error('the $entryForm query failed');
+const $entryStored = document.querySelector('#entries-stored');
+if (!$entryStored) throw new Error('the $entryStored query failed');
+const $journalEntries = document.querySelector('#journal-entries-list');
+if (!$journalEntries) throw new Error('the $journalEntries query failed');
