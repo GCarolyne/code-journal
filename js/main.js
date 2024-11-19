@@ -72,3 +72,21 @@ const $entryStored = document.querySelector('#entries-stored');
 if (!$entryStored) throw new Error('the $entryStored query failed');
 const $journalEntries = document.querySelector('#journal-entries-list');
 if (!$journalEntries) throw new Error('the $journalEntries query failed');
+function viewSwap(viewName) {
+  if (!$entryForm) throw new Error('the $entryForm query failed');
+  if (!$entryStored) throw new Error('the $entryStored query failed');
+  if (viewName === 'entries') {
+    $entryStored.classList.remove('hidden');
+    $entryForm.classList.add('hidden');
+  } else if (viewName === 'entry-form') {
+    $entryStored?.classList.add('hidden');
+    $entryForm?.classList.remove('hidden');
+  }
+  data.view = viewName;
+}
+const $anchor = document.querySelector('a');
+if (!$anchor) throw new Error('query failed');
+function handleClick() {
+  viewSwap('entries');
+}
+$anchor.addEventListener('click', handleClick);

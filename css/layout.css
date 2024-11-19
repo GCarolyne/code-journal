@@ -40,3 +40,8 @@
 .new-view {
   margin-left: 70%;
 }
+
+.column-full {
+  display: flex;
+  justify-content: space-between;
+}
