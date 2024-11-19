@@ -90,10 +90,10 @@ function handleClick(viewName) {
   viewSwap(viewName);
 }
 $anchor.addEventListener('click', () => {
-  handleClick('entry-form');
+  handleClick('entries');
 });
 const $new = document.querySelector('#anchor');
 if (!$new) throw new Error('query for new failed');
 $new.addEventListener('click', () => {
-  handleClick('entries');
+  handleClick('entry-form');
 });

@@ -3,7 +3,9 @@ header {
   color: white;
 }
 
-h1 {
+#heading {
+  background-color: purple;
+  color: white;
   margin: 0;
 }
 
@@ -60,17 +62,6 @@ ul {
   font-size: medium;
 }
 
-h3 {
-  background-color: purple;
-  color: white;
-}
-
-a {
-  background-color: purple;
-  color: white;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-radius: 10px;
+#nav-entries {
   font-size: medium;
 }
