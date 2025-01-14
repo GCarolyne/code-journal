@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
   .container {
     max-width: 900px;
   }
@@ -31,4 +31,48 @@
   .column-half {
     width: 50%;
   }
+}
+
+img {
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.title-text {
+  margin-top: 20rem;
+}
+
+.title .url {
+  padding-right: 5rem;
+}
+
+.notes {
+  resize: vertical;
+  width: 100%;
+  padding-bottom: 10rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+button {
+  border-radius: 20%;
+  float: right;
+  padding: 10px;
+  border: none;
+  text-transform: capitalize;
+}
+
+input {
+  width: 100%;
+}
+
+#title {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+#url {
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
 }

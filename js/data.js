@@ -1,26 +1,10 @@
-interface Entries {
-  title: string;
-  url: string;
-  notes: string;
-  entryId: number;
-}
-
-interface Data {
-  title?: string;
-  view?: string;
-  entries: Entries[];
-  editing: null;
-  nextEntryId: number;
-}
-
+'use strict';
 const data = readData();
-
-function writeData(): undefined {
+function writeData() {
   const dataJSON = JSON.stringify(data);
   localStorage.setItem('data-storage', dataJSON);
 }
-
-function readData(): Data {
+function readData() {
   if (localStorage.getItem('data')) {
     const parsedJSON = JSON.parse(localStorage.getItem('data') || '[]');
     return parsedJSON;
