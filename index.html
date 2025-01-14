@@ -26,44 +26,44 @@
       </div>
     </header>
     <main class="container">
-      <div class="row">
-        <div class="column-half">
-          <h2 class="newEntry">New Entry</h2>
-          <div data-view="entry-form">
-            <img
-              src="images/placeholder-image-square.jpg"
-              class="placeholderIMG" />
+      <form class="column-full">
+        <div class="row">
+          <div class="column-half">
+            <h2 class="newEntry">New Entry</h2>
+
+            <div data-view="entry-form">
+              <img
+                src="images/placeholder-image-square.jpg"
+                class="placeholderIMG" />
+            </div>
+          </div>
+          <div class="column-half">
+            <p class="title-text">Title</p>
+            <input
+              class="title"
+              placeholder="Title"
+              type="text"
+              id="title"
+              required />
+            <p class="urlPhoto">Photo Url</p>
+            <input
+              class="url"
+              placeholder="Photo URL"
+              type="text"
+              id="url"
+              required />
           </div>
         </div>
-        <div class="column-half">
-          <p class="title-text">Title</p>
-          <input
-            class="title"
-            placeholder="Title"
-            type="text"
-            id="title"
-            required="This field is required" />
-          <p class="urlPhoto">Photo Url</p>
-          <input
-            class="url"
-            placeholder="Photo URL"
-            type="text"
-            id="url"
-            required="This field is required" />
+
+        <div class="row">
+          <div class="column-full">
+            <p class="noteP">Notes</p>
+            <textarea class="notes" id="notesText" required></textarea>
+            <button type="submit" class="savaButton" name="save">Save</button>
+          </div>
         </div>
-        <div class="column-full">
-          <p class="noteP">Notes</p>
-          <input
-            class="notes"
-            type="text"
-            id="notesText"
-            required="This field is required" />
-        </div>
-        <div class="column-full">
-          <button type="submit" class="savaButton" name="save">Save</button>
-        </div>
-        <div data-view="entries" class="hidden"></div>
-      </div>
+      </form>
+      <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
