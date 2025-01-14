@@ -57,6 +57,9 @@ img {
 button {
   border-radius: 20%;
   float: right;
+  padding: 10px;
+  border: none;
+  text-transform: capitalize;
 }
 
 input {

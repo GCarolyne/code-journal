@@ -9,3 +9,8 @@ header {
 .newEntry {
   color: black;
 }
+
+.savaButton {
+  background-color: purple;
+  color: white;
+}
