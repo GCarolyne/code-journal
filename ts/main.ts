@@ -39,7 +39,7 @@ $allForm.addEventListener('submit', (event: Event) => {
   };
 
   data.nextEntryId++;
-  data.entries.push(entryObject);
+  data.entries.unshift(entryObject);
 
   writeData();
 

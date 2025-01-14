@@ -29,7 +29,7 @@ $allForm.addEventListener('submit', (event) => {
     entryId: data.nextEntryId,
   };
   data.nextEntryId++;
-  data.entries.push(entryObject);
+  data.entries.unshift(entryObject);
   writeData();
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();

@@ -26,43 +26,35 @@
       </div>
     </header>
     <main class="container">
-      <form class="column-full">
-        <div class="row">
-          <div class="column-half">
-            <h2 class="newEntry">New Entry</h2>
-
-            <div data-view="entry-form">
-              <img
-                src="images/placeholder-image-square.jpg"
-                class="placeholderIMG" />
+      <div data-view="entry-form">
+        <form>
+          <div class="row">
+            <div class="column-full">
+              <h2 class="newEntry">New Entry</h2>
             </div>
           </div>
-          <div class="column-half">
-            <p class="title-text">Title</p>
-            <input
-              class="title"
-              placeholder="Title"
-              type="text"
-              id="title"
-              required />
-            <p class="urlPhoto">Photo Url</p>
-            <input
-              class="url"
-              placeholder="Photo URL"
-              type="text"
-              id="url"
-              required />
-          </div>
-        </div>
+          <div class="row">
+            <div class="column-half">
+              <img
+                src="images/placeholder-image-square.jpg"
+                class="placeholderIMG"
+                alt="an image of your choice" />
+            </div>
+            <div class="column-half">
+              <label class="title-text">Title</label>
+              <input class="title" type="text" id="title" required />
+              <label class="urlPhoto">Photo Url</label>
+              <input class="url" type="text" id="url" required />
+            </div>
 
-        <div class="row">
-          <div class="column-full">
-            <p class="noteP">Notes</p>
-            <textarea class="notes" id="notesText" required></textarea>
-            <button type="submit" class="savaButton" name="save">Save</button>
+            <div class="column-full">
+              <label class="noteP">Notes</label>
+              <textarea class="notes" id="notesText" required></textarea>
+              <button type="submit" class="savaButton" name="save">Save</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
