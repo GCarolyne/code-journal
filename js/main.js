@@ -13,18 +13,14 @@ const $allForm = document.querySelector('form');
 if (!$allForm) throw new Error('query for form failed');
 $inputUrl.addEventListener('input', (event) => {
   const $eventTarget = event.target;
-  console.log('$eventTarget', $eventTarget);
   const inputValue = $inputUrl.value;
-  console.log('inputValue', inputValue);
   if ($eventTarget === $inputUrl) {
     $placeholderImg.setAttribute('src', inputValue);
   } else {
     $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   }
 });
-$button.addEventListener('submit', (event) => {
-  const $eventTarget = event.target;
-  console.log('$eventTarget', $eventTarget);
+$allForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const entryObject = {
     title: $title.value,
@@ -34,7 +30,7 @@ $button.addEventListener('submit', (event) => {
   };
   data.nextEntryId++;
   data.entries.push(entryObject);
-  console.log('entryObject', entryObject);
+  writeData();
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
 });

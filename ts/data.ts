@@ -6,17 +6,30 @@ interface Entries {
 }
 
 interface Data {
-  view: string;
+  title?: string;
+  view?: string;
   entries: Entries[];
   editing: null;
   nextEntryId: number;
 }
 
-const data: Data = {
-  view: 'entry-form',
-  entries: [],
-  editing: null,
-  nextEntryId: 1,
-};
+const data = readData();
 
-console.log('data', data);
+function writeData(): undefined {
+  const dataJSON = JSON.stringify(data);
+  localStorage.setItem('data-storage', dataJSON);
+}
+
+function readData(): Data {
+  if (localStorage.getItem('data')) {
+    const parsedJSON = JSON.parse(localStorage.getItem('data') || '[]');
+    return parsedJSON;
+  } else {
+    return {
+      view: 'entry-form',
+      entries: [],
+      editing: null,
+      nextEntryId: 1,
+    };
+  }
+}
