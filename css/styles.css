@@ -13,4 +13,19 @@ header {
 .savaButton {
   background-color: purple;
   color: white;
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.entries {
+  font-size: 14px;
+}
+
+.new {
+  margin-top: 2rem;
+  background-color: purple;
+  color: white;
 }

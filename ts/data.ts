@@ -2,7 +2,7 @@ interface Entries {
   title: string;
   url: string;
   notes: string;
-  entryId: number;
+  entryId?: number;
 }
 
 interface Data {
