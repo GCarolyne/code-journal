@@ -22,6 +22,8 @@ $inputUrl.addEventListener('input', (event) => {
 });
 $allForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  const ulParent = document.querySelector('ul');
+  if (!ulParent) throw new Error('query for ul parent failed. ');
   const entryObject = {
     title: $title.value,
     url: $inputUrl.value,
@@ -31,12 +33,16 @@ $allForm.addEventListener('submit', (event) => {
   data.nextEntryId++;
   data.entries.unshift(entryObject);
   writeData();
+  const resultRender = renderEntry(entryObject);
+  ulParent.prepend(resultRender);
+  viewSwap('entries');
+  if (data.entries.length > 0) {
+    toggleNoEntries();
+  }
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
 });
 function renderEntry(entry) {
-  const $ulParent = document.querySelector('ul');
-  if (!$ulParent) throw new Error('the query for ulParent failed');
   const $liChild = document.createElement('li');
   $liChild.setAttribute('class', 'first-entry');
   const $divRow = document.createElement('div');
@@ -62,12 +68,38 @@ function renderEntry(entry) {
   return $liChild;
 }
 document.addEventListener('DOMContentLoaded', () => {
+  viewSwap('entry-form');
   const $ulParent = document.querySelector('ul');
   if (!$ulParent) throw new Error('the query for ulParent failed');
-  const $liChild = document.querySelector('li');
-  if (!$liChild) throw new Error('the query for li child failed. ');
   for (let i = 0; i < data.entries.length; i++) {
     const entry = data.entries[i];
-    renderEntry(entry);
+    const resultEntry = renderEntry(entry);
+    $ulParent.appendChild(resultEntry);
+  }
+  if (data.entries.length > 0) {
+    toggleNoEntries();
   }
 });
+function toggleNoEntries() {
+  const noEntriesElement = document.querySelector('.no-entries');
+  const parentUl = document.querySelector('.parentUl');
+  const hasEntries = parentUl?.children.length;
+  if (!hasEntries) {
+    noEntriesElement?.classList.remove('hidden');
+    parentUl?.classList.add('hidden');
+  } else {
+    noEntriesElement?.classList.add('hidden');
+    parentUl.classList.remove('hidden');
+  }
+}
+function viewSwap(viewName) {
+  const entryFormView = document.getElementById('form-entry');
+  const entriesView = document.getElementById('entries-view');
+  if (viewName === 'entries') {
+    entriesView.classList.remove('hidden');
+    entryFormView.classList.add('hidden');
+  } else {
+    entriesView.classList.add('hidden');
+    entryFormView.classList.remove('hidden');
+  }
+}

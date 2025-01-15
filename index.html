@@ -20,13 +20,15 @@
       <div class="container">
         <div class="row">
           <div class="column-full">
-            <h1 class="heading">Code Journal</h1>
+            <h1 class="heading">
+              Code Journal <a class="nav-link" data-view="entries">Entries</a>
+            </h1>
           </div>
         </div>
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form">
+      <div data-view="entry-form" id="form-entry">
         <form>
           <div class="row">
             <div class="column-full">
@@ -55,29 +57,16 @@
           </div>
         </form>
       </div>
-      <div data-view="entries" class="hidden">
+      <div data-view="entries" class="hidden" id="entries-view">
         <div class="row">
-          <div class="column-half">
-            <h2 class="heading-entries">Entries</h2>
+          <div class="column-full">
+            <button type="submit" id="new-entry">New</button>
+            <a class="nav-link-2" data-view="Entry Form">Entries</a>
           </div>
         </div>
-        <ul>
-          <li class="first-entry">
-            <div class="row">
-              <div class="column-half">
-                <img
-                  src="images/placeholder-image-square.jpg"
-                  alt="placeholder"
-                  id="textimg" />
-              </div>
-              <div class="column-half">
-                <h2 class="title-entries">My Owl</h2>
-                <h3 class="notes-entries">Likes to fly.</h3>
-              </div>
-            </div>
-          </li>
-        </ul>
       </div>
+      <h3 class="no-entries">No entries have been recorded.</h3>
+      <ul class="parentUl"></ul>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>

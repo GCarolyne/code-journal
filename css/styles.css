@@ -29,3 +29,13 @@ ul {
   background-color: purple;
   color: white;
 }
+
+.show {
+  display: all;
+}
+
+#new-entry {
+  background-color: purple;
+  color: white;
+  margin-bottom: 2rem;
+}
