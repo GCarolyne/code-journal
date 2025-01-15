@@ -6,8 +6,7 @@ interface Entries {
 }
 
 interface Data {
-  title?: string;
-  view?: string;
+  view: string;
   entries: Entries[];
   editing: null;
   nextEntryId: number;

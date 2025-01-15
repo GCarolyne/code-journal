@@ -43,12 +43,9 @@ $allForm.addEventListener('submit', (event: Event) => {
   data.entries.unshift(entryObject);
 
   writeData();
+  viewSwap('entries');
   const resultRender = renderEntry(entryObject);
   ulParent.prepend(resultRender);
-  viewSwap('entries');
-  if (data.entries.length > 0) {
-    toggleNoEntries();
-  }
 
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
@@ -82,7 +79,6 @@ function renderEntry(entry: Entries): HTMLLIElement {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  viewSwap('entry-form');
   const $ulParent = document.querySelector('ul');
   if (!$ulParent) throw new Error('the query for ulParent failed');
   for (let i = 0; i < data.entries.length; i++) {
@@ -90,27 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultEntry = renderEntry(entry);
     $ulParent.appendChild(resultEntry);
   }
-  if (data.entries.length > 0) {
-    toggleNoEntries();
-  }
+
+  toggleNoEntries();
+
+  viewSwap(data.view);
 });
 
 function toggleNoEntries(): void {
   const noEntriesElement = document.querySelector('.no-entries');
-  const parentUl = document.querySelector('.parentUl');
-  const hasEntries = parentUl?.children.length;
-  if (!hasEntries) {
-    noEntriesElement?.classList.remove('hidden');
-    parentUl?.classList.add('hidden');
-  } else {
+  if (data.entries.length > 0) {
     noEntriesElement?.classList.add('hidden');
-    parentUl.classList.remove('hidden');
+  } else {
+    noEntriesElement?.classList.remove('hidden');
   }
 }
 
-type ViewName = 'entries' | 'entry-form';
-
-function viewSwap(viewName: ViewName): void {
+function viewSwap(viewName: string): undefined {
   const entryFormView = document.getElementById(
     'form-entry',
   ) as HTMLFormElement;
@@ -125,4 +116,26 @@ function viewSwap(viewName: ViewName): void {
     entriesView.classList.add('hidden');
     entryFormView.classList.remove('hidden');
   }
+  data.view = viewName;
 }
+
+const $navEntriesLink = document.querySelector('.nav-link');
+if (!$navEntriesLink)
+  throw new Error('the query for entries nav link failed. ');
+
+$navEntriesLink.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target;
+  if ($eventTarget === $navEntriesLink) {
+    viewSwap('entry-form');
+  }
+});
+
+const $newButton = document.querySelector('#new-entry');
+if (!$newButton) throw new Error('the query for entries nav link failed');
+
+$newButton.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target;
+  if ($eventTarget === $newButton) {
+    viewSwap('entry-form');
+  }
+});
