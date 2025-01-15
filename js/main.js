@@ -35,7 +35,8 @@ $allForm.addEventListener('submit', (event) => {
   $allForm.reset();
 });
 function renderEntry(entry) {
-  const $ulParent = document.createElement('ul');
+  const $ulParent = document.querySelector('ul');
+  if (!$ulParent) throw new Error('the query for ulParent failed');
   const $liChild = document.createElement('li');
   $liChild.setAttribute('class', 'first-entry');
   const $divRow = document.createElement('div');
@@ -43,16 +44,15 @@ function renderEntry(entry) {
   const $divColumn = document.createElement('div');
   $divColumn.setAttribute('class', 'column-half');
   const $image = document.createElement('img');
-  $image.setAttribute('src', `${$inputUrl.value}`);
+  $image.setAttribute('src', entry.url);
   $image.setAttribute('alt', 'placeholder image');
   $image.setAttribute('id', 'textimg');
   const $secondDiv = document.createElement('div');
   $secondDiv.setAttribute('class', 'column-half');
   const $h2 = document.createElement('h2');
-  $h2.setAttribute('class', `${$title.value}`);
+  $h2.textContent = entry.title;
   const $h3 = document.createElement('h3');
-  $h3.setAttribute('class', `${$notes.value}`);
-  $ulParent.appendChild($liChild);
+  $h3.textContent = entry.notes;
   $liChild.appendChild($divRow);
   $divRow.appendChild($divColumn);
   $divRow.appendChild($secondDiv);
@@ -60,15 +60,14 @@ function renderEntry(entry) {
   $secondDiv.appendChild($h2);
   $secondDiv.appendChild($h3);
   return $liChild;
-  console.log('entry', entry);
 }
-document.addEventListener('DOMContentLoaded', (event) => {
-  const $eventTarget = event.target;
-  console.log('event', $eventTarget);
+document.addEventListener('DOMContentLoaded', () => {
   const $ulParent = document.querySelector('ul');
   if (!$ulParent) throw new Error('the query for ulParent failed');
-  data.entries.forEach((entry) => {
-    const entryElement = renderEntry(entry);
-    $ulParent.appendChild(entryElement);
-  });
+  const $liChild = document.querySelector('li');
+  if (!$liChild) throw new Error('the query for li child failed. ');
+  for (let i = 0; i < data.entries.length; i++) {
+    const entry = data.entries[i];
+    renderEntry(entry);
+  }
 });
