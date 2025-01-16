@@ -49,7 +49,6 @@ function renderEntry(entry) {
   const $image = document.createElement('img');
   $image.setAttribute('src', entry.url);
   $image.setAttribute('alt', 'placeholder image');
-  $image.setAttribute('id', 'textimg');
   const $secondDiv = document.createElement('div');
   $secondDiv.setAttribute('class', 'column-half');
   const $h2 = document.createElement('h2');
@@ -62,6 +61,9 @@ function renderEntry(entry) {
   $divColumn.appendChild($image);
   $secondDiv.appendChild($h2);
   $secondDiv.appendChild($h3);
+  const $pencilEdit = document.createElement('i');
+  $pencilEdit.setAttribute('class', 'fa-solid fa-pencil');
+  $h2.appendChild($pencilEdit);
   return $liChild;
 }
 document.addEventListener('DOMContentLoaded', () => {

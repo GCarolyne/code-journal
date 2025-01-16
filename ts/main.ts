@@ -73,7 +73,9 @@ function renderEntry(entry: Entries): HTMLLIElement {
   $divColumn.appendChild($image);
   $secondDiv.appendChild($h2);
   $secondDiv.appendChild($h3);
-
+  const $pencilEdit = document.createElement('i');
+  $pencilEdit.setAttribute('class', 'fa-solid fa-pencil');
+  $h2.appendChild($pencilEdit);
   return $liChild;
 }
 
