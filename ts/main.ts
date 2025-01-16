@@ -60,8 +60,8 @@ function renderEntry(entry: Entries): HTMLLIElement {
   $divColumn.setAttribute('class', 'column-half');
   const $image = document.createElement('img');
   $image.setAttribute('src', entry.url);
-  $image.setAttribute('alt', 'placeholder image');
-  $image.setAttribute('id', 'textimg');
+  $image.setAttribute('alt', 'placeholder');
+  $image.setAttribute('id', 'text');
   const $secondDiv = document.createElement('div');
   $secondDiv.setAttribute('class', 'column-half');
   const $h2 = document.createElement('h2');
