@@ -126,7 +126,7 @@ if (!$navEntriesLink)
 $navEntriesLink.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target;
   if ($eventTarget === $navEntriesLink) {
-    viewSwap('entry-form');
+    viewSwap('entries');
   }
 });
 
