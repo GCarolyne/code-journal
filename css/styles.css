@@ -13,4 +13,61 @@ header {
 .savaButton {
   background-color: purple;
   color: white;
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.entries {
+  font-size: 14px;
+}
+
+.new {
+  margin-top: 2rem;
+  background-color: purple;
+  color: white;
+}
+
+.show {
+  display: all;
+}
+
+#new-entry {
+  margin-top: 20px;
+  background-color: purple;
+  color: white;
+  padding: 15px;
+  margin-bottom: 2rem;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.nav-link {
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: 8rem;
+}
+
+.nav-link-2 {
+  font-size: 20px;
+  font-weight: 800;
+  font-style: normal;
+}
+
+#text-e.nav-link-2 {
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-size: 30px;
+  font-weight: 800;
+  font-style: normal;
+}
+
+[data-view='entries'] {
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 25px;
+  padding-left: 20px;
 }

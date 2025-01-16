@@ -2,12 +2,11 @@ interface Entries {
   title: string;
   url: string;
   notes: string;
-  entryId: number;
+  entryId?: number;
 }
 
 interface Data {
-  title?: string;
-  view?: string;
+  view: string;
   entries: Entries[];
   editing: null;
   nextEntryId: number;
@@ -21,8 +20,8 @@ function writeData(): undefined {
 }
 
 function readData(): Data {
-  if (localStorage.getItem('data')) {
-    const parsedJSON = JSON.parse(localStorage.getItem('data') || '[]');
+  if (localStorage.getItem('data-storage')) {
+    const parsedJSON = JSON.parse(localStorage.getItem('data-storage') || '[]');
     return parsedJSON;
   } else {
     return {
