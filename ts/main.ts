@@ -45,25 +45,49 @@ $allForm.addEventListener('submit', (event: Event) => {
   writeData();
   viewSwap('entries');
 
+  if (data.editing === null) {
+    return entryObject;
+  } else {
+    entryObject.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = entryObject;
+        console.log('entryObject', entryObject);
+        break;
+      }
+    }
+  }
+
   const resultRender = renderEntry(entryObject);
   ulParent.prepend(resultRender);
 
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
 });
+
 const $ulParent = document.querySelector('ul');
 if (!$ulParent) throw new Error('the query for ulParent failed');
+
 $ulParent.addEventListener('click', (event: Event) => {
-  const $eventTarget = event.target;
-  const $faPencil = document.querySelector('.fa-pencil');
-  if (!$faPencil) throw new Error('the query for pencil failed.');
-  if ($eventTarget === $faPencil) {
-    viewSwap('entry-form');
-  }
-  for (let i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryId === data.nextEntryId) {
-      data.editing = data.entries[i];
+  const $eventTarget = event.target as HTMLElement;
+  viewSwap('entry-form');
+  if ($eventTarget.tagName === 'I') {
+    const dataElement = $eventTarget.closest('li') as HTMLLIElement;
+    const entryIds = dataElement.dataset.entryId;
+
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number(entryIds)) {
+        const matchingEntry = data.entries[i];
+        data.editing = matchingEntry;
+        break;
+      }
     }
+    if (data.editing) {
+      $inputUrl.value = data.editing.url;
+      $title.value = data.editing.title;
+      $notes.value = data.editing.notes;
+    }
+    viewSwap('Edit Entry');
   }
 });
 
