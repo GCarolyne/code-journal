@@ -44,11 +44,27 @@ $allForm.addEventListener('submit', (event: Event) => {
 
   writeData();
   viewSwap('entries');
+
   const resultRender = renderEntry(entryObject);
   ulParent.prepend(resultRender);
 
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
+});
+const $ulParent = document.querySelector('ul');
+if (!$ulParent) throw new Error('the query for ulParent failed');
+$ulParent.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target;
+  const $faPencil = document.querySelector('.fa-pencil');
+  if (!$faPencil) throw new Error('the query for pencil failed.');
+  if ($eventTarget === $faPencil) {
+    viewSwap('entry-form');
+  }
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.nextEntryId) {
+      data.editing = data.entries[i];
+    }
+  }
 });
 
 function renderEntry(entry: Entries): HTMLLIElement {
@@ -76,6 +92,9 @@ function renderEntry(entry: Entries): HTMLLIElement {
   const $pencilEdit = document.createElement('i');
   $pencilEdit.setAttribute('class', 'fa-solid fa-pencil');
   $h2.appendChild($pencilEdit);
+  $h2.classList.add('font-pencil');
+  $pencilEdit.classList.add('.pencil-size');
+  $liChild.setAttribute('data-entry-id', 'entryId');
   return $liChild;
 }
 
