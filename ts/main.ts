@@ -41,6 +41,7 @@ $allForm.addEventListener('submit', (event: Event) => {
     entryId: data.nextEntryId,
   };
   if (data.editing !== null) {
+    entryObject.entryId = data.editing.entryId;
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === data.editing.entryId) {
         data.entries[i] = entryObject;
@@ -54,6 +55,7 @@ $allForm.addEventListener('submit', (event: Event) => {
         $li.replaceWith($newLi);
       }
     }
+    data.editing = null;
   } else {
     entryObject.entryId = data.nextEntryId;
     data.nextEntryId++;
@@ -63,8 +65,9 @@ $allForm.addEventListener('submit', (event: Event) => {
   }
   writeData();
   viewSwap('entries');
-
+  toggleNoEntries();
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   $allForm.reset();
 });
 
@@ -89,8 +92,9 @@ $ulParent.addEventListener('click', (event: Event) => {
       $inputUrl.value = data.editing.url;
       $title.value = data.editing.title;
       $notes.value = data.editing.notes;
+      $h2.textContent = 'Edit Entry';
     }
-    $h2.textContent = 'Edit Entry';
+
     viewSwap('entry-form');
   }
 });
@@ -184,6 +188,7 @@ if (!$newButton) throw new Error('the query for entries nav link failed');
 $newButton.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target;
   if ($eventTarget === $newButton) {
+    $allForm.reset();
     viewSwap('entry-form');
   }
 });
