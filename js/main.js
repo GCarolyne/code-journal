@@ -30,32 +30,38 @@ $allForm.addEventListener('submit', (event) => {
     notes: $notes.value,
     entryId: data.nextEntryId,
   };
-  data.nextEntryId++;
-  data.entries.unshift(entryObject);
-  writeData();
-  viewSwap('entries');
-  if (data.editing === null) {
-    return entryObject;
-  } else {
-    entryObject.entryId = data.editing.entryId;
+  if (data.editing !== null) {
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === data.editing.entryId) {
         data.entries[i] = entryObject;
-        console.log('entryObject', entryObject);
         break;
       }
     }
+    const $allLi = document.querySelectorAll('li');
+    for (const $li of $allLi) {
+      if ($li.dataset.entryId === String(data.editing.entryId)) {
+        const $newLi = renderEntry(entryObject);
+        $li.replaceWith($newLi);
+      }
+    }
+  } else {
+    entryObject.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(entryObject);
+    const resultRender = renderEntry(entryObject);
+    ulParent.prepend(resultRender);
   }
-  const resultRender = renderEntry(entryObject);
-  ulParent.prepend(resultRender);
+  writeData();
+  viewSwap('entries');
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $allForm.reset();
 });
 const $ulParent = document.querySelector('ul');
 if (!$ulParent) throw new Error('the query for ulParent failed');
 $ulParent.addEventListener('click', (event) => {
+  const $h2 = document.querySelector('h2');
+  if (!$h2) throw new Error('query for h2 failed');
   const $eventTarget = event.target;
-  viewSwap('entry-form');
   if ($eventTarget.tagName === 'I') {
     const dataElement = $eventTarget.closest('li');
     const entryIds = dataElement.dataset.entryId;
@@ -71,7 +77,8 @@ $ulParent.addEventListener('click', (event) => {
       $title.value = data.editing.title;
       $notes.value = data.editing.notes;
     }
-    viewSwap('Edit Entry');
+    $h2.textContent = 'Edit Entry';
+    viewSwap('entry-form');
   }
 });
 function renderEntry(entry) {
@@ -101,7 +108,7 @@ function renderEntry(entry) {
   $h2.appendChild($pencilEdit);
   $h2.classList.add('font-pencil');
   $pencilEdit.classList.add('.pencil-size');
-  $liChild.setAttribute('data-entry-id', 'entryId');
+  $liChild.setAttribute('data-entry-id', String(entry.entryId));
   return $liChild;
 }
 document.addEventListener('DOMContentLoaded', () => {
