@@ -85,3 +85,13 @@ input {
   justify-content: space-between;
   align-items: center;
 }
+
+.font-pencil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pencil-size {
+  font-size: 1rem;
+}

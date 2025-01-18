@@ -30,25 +30,73 @@ $inputUrl.addEventListener('input', (event: Event) => {
 
 $allForm.addEventListener('submit', (event: Event) => {
   event.preventDefault();
+
   const ulParent = document.querySelector('ul');
   if (!ulParent) throw new Error('query for ul parent failed. ');
+
   const entryObject: Entries = {
     title: $title.value,
     url: $inputUrl.value,
     notes: $notes.value,
     entryId: data.nextEntryId,
   };
-
-  data.nextEntryId++;
-  data.entries.unshift(entryObject);
-
+  if (data.editing !== null) {
+    entryObject.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = entryObject;
+        break;
+      }
+    }
+    const $allLi = document.querySelectorAll('li');
+    for (const $li of $allLi) {
+      if ($li.dataset.entryId === String(data.editing.entryId)) {
+        const $newLi = renderEntry(entryObject);
+        $li.replaceWith($newLi);
+      }
+    }
+    data.editing = null;
+  } else {
+    entryObject.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(entryObject);
+    const resultRender = renderEntry(entryObject);
+    ulParent.prepend(resultRender);
+  }
   writeData();
   viewSwap('entries');
-  const resultRender = renderEntry(entryObject);
-  ulParent.prepend(resultRender);
-
+  toggleNoEntries();
   $placeholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   $allForm.reset();
+});
+
+const $ulParent = document.querySelector('ul');
+if (!$ulParent) throw new Error('the query for ulParent failed');
+
+$ulParent.addEventListener('click', (event: Event) => {
+  const $h2 = document.querySelector('h2');
+  if (!$h2) throw new Error('query for h2 failed');
+  const $eventTarget = event.target as HTMLElement;
+  if ($eventTarget.tagName === 'I') {
+    const dataElement = $eventTarget.closest('li') as HTMLLIElement;
+    const entryIds = dataElement.dataset.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number(entryIds)) {
+        const matchingEntry = data.entries[i];
+        data.editing = matchingEntry;
+        break;
+      }
+    }
+    if (data.editing) {
+      $inputUrl.value = data.editing.url;
+      $title.value = data.editing.title;
+      $notes.value = data.editing.notes;
+      $h2.textContent = 'Edit Entry';
+    }
+
+    viewSwap('entry-form');
+  }
 });
 
 function renderEntry(entry: Entries): HTMLLIElement {
@@ -73,7 +121,12 @@ function renderEntry(entry: Entries): HTMLLIElement {
   $divColumn.appendChild($image);
   $secondDiv.appendChild($h2);
   $secondDiv.appendChild($h3);
-
+  const $pencilEdit = document.createElement('i');
+  $pencilEdit.setAttribute('class', 'fa-solid fa-pencil');
+  $h2.appendChild($pencilEdit);
+  $h2.classList.add('font-pencil');
+  $pencilEdit.classList.add('.pencil-size');
+  $liChild.setAttribute('data-entry-id', String(entry.entryId));
   return $liChild;
 }
 
@@ -135,6 +188,10 @@ if (!$newButton) throw new Error('the query for entries nav link failed');
 $newButton.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target;
   if ($eventTarget === $newButton) {
+    const $h2 = document.querySelector('h2');
+    if (!$h2) throw new Error('query for h2 failed');
+    $h2.textContent = 'New Entry';
+    $allForm.reset();
     viewSwap('entry-form');
   }
 });
