@@ -159,6 +159,9 @@ if (!$newButton) throw new Error('the query for entries nav link failed');
 $newButton.addEventListener('click', (event) => {
   const $eventTarget = event.target;
   if ($eventTarget === $newButton) {
+    const $h2 = document.querySelector('h2');
+    if (!$h2) throw new Error('query for h2 failed');
+    $h2.textContent = 'New Entry';
     $allForm.reset();
     viewSwap('entry-form');
   }
